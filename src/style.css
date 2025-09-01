@@ -1,0 +1,133 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: "Segoe UI", sans-serif;
+  background: #f7f9fc;
+  color: #333;
+  line-height: 1.6;
+  padding: 20px;
+}
+
+.app {
+  max-width: 600px;
+  margin: 0 auto;
+}
+
+.screen {
+  display: none;
+  padding: 20px;
+  background: white;
+  border-radius: 12px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+.screen.active {
+  display: block;
+}
+
+h1 {
+  text-align: center;
+  margin-bottom: 20px;
+  color: #2c3e50;
+}
+
+.fact-container {
+  min-height: 120px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 20px 0;
+  padding: 15px;
+  background: #eef2f7;
+  border-radius: 8px;
+  font-style: italic;
+}
+
+.fact {
+  font-size: 18px;
+  text-align: center;
+}
+
+.btn {
+  display: block;
+  width: 100%;
+  padding: 12px;
+  margin: 10px 0;
+  font-size: 16px;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  background: #3498db;
+  color: white;
+  transition: background 0.3s;
+}
+
+.btn:hover {
+  background: #2980b9;
+}
+
+.btn-outline {
+  background: #f1f1f1;
+  color: #555;
+  border: 1px solid #ccc;
+}
+
+.btn-outline:hover {
+  background: #e0e0e0;
+}
+
+.btn-danger {
+  background: #e74c3c;
+}
+
+.btn-danger:hover {
+  background: #c0392b;
+}
+
+.link {
+  display: block;
+  text-align: center;
+  margin: 15px 0;
+  color: #3498db;
+  text-decoration: none;
+  font-size: 16px;
+}
+
+.fact-list {
+  list-style: none;
+  margin: 20px 0;
+}
+
+.fact-list li {
+  padding: 12px;
+  margin: 8px 0;
+  background: #f8f9fa;
+  border-left: 4px solid #3498db;
+  border-radius: 6px;
+  position: relative;
+}
+
+.fact-list li button {
+  position: absolute;
+  right: 10px;
+  top: 10px;
+  width: auto;
+  padding: 4px 8px;
+  font-size: 12px;
+  background: #e74c3c;
+}
+
+/* Адаптив */
+@media (max-width: 480px) {
+  .btn {
+    padding: 10px;
+    font-size: 15px;
+  }
+  h1 {
+    font-size: 24px;
+  }
+}

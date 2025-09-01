@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="ru">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Знаешь ли ты?</title>
+    <link rel="stylesheet" href="/src/style.css" />
+  </head>
+  <body>
+    <div class="app">
+      <!-- Основной экран -->
+      <main id="main-screen" class="screen active">
+        <h1>Знаешь ли ты?</h1>
+        <div class="fact-container">
+          <p id="fact-text" class="fact">
+            Нажми кнопку, чтобы узнать интересный факт!
+          </p>
+        </div>
+        <button id="new-fact-btn" class="btn">Показать случайный факт</button>
+        <button id="save-fact-btn" class="btn btn-outline">
+          ❤️ В избранное
+        </button>
+        <a href="#" id="go-favorites" class="link">→ Избранное</a>
+      </main>
+
+      <!-- Экран "Избранное" -->
+      <main id="favorites-screen" class="screen">
+        <h1>❤️ Избранное</h1>
+        <ul id="favorites-list" class="fact-list"></ul>
+        <a href="#" id="go-back" class="link">← Назад</a>
+        <button id="clear-favorites" class="btn btn-danger">
+          Очистить всё
+        </button>
+      </main>
+    </div>
+
+    <script type="module" src="/src/main.js"></script>
+  </body>
+</html>
