@@ -1,4 +1,3 @@
-// Список интересных фактов
 const facts = [
   "Медузы существуют дольше, чем динозавры — более 500 миллионов лет.",
   "У осьминога три сердца и синяя кровь.",
@@ -12,7 +11,6 @@ const facts = [
   "Пингвины преданы своим партнёрам — более 90% пар воссоединяются после миграции.",
 ];
 
-// DOM-элементы — должны существовать в index.html
 const factText = document.getElementById("fact-text");
 const newFactBtn = document.getElementById("new-fact-btn");
 const saveFactBtn = document.getElementById("save-fact-btn");
@@ -23,29 +21,29 @@ const favoritesScreen = document.getElementById("favorites-screen");
 const favoritesList = document.getElementById("favorites-list");
 const clearFavorites = document.getElementById("clear-favorites");
 
-// Текущий факт
 let currentFact = null;
 
-// Загружаем избранное из localStorage
 function getFavorites() {
   const saved = localStorage.getItem("favorites");
   return saved ? JSON.parse(saved) : [];
 }
 
-// Сохраняем избранное
 function saveFavorites(favs) {
   localStorage.setItem("favorites", JSON.stringify(favs));
 }
 
-// Показываем случайный факт
 function showRandomFact() {
   const randomIndex = Math.floor(Math.random() * facts.length);
   currentFact = facts[randomIndex];
+
+  factText.classList.remove("fade");
+  factText.offsetHeight;
   factText.textContent = currentFact;
+  factText.classList.add("fade");
+
   updateSaveButton();
 }
 
-// Обновляем кнопку "в избранное"
 function updateSaveButton() {
   const favorites = getFavorites();
   const isSaved = currentFact && favorites.includes(currentFact);
@@ -53,7 +51,6 @@ function updateSaveButton() {
   saveFactBtn.disabled = isSaved || !currentFact;
 }
 
-// Добавить в избранное
 saveFactBtn.addEventListener("click", () => {
   if (!currentFact) return;
   const favorites = getFavorites();
@@ -65,7 +62,6 @@ saveFactBtn.addEventListener("click", () => {
   }
 });
 
-// Переключение экранов
 goFavorites.addEventListener("click", (e) => {
   e.preventDefault();
   mainScreen.classList.remove("active");
@@ -79,7 +75,6 @@ goBack.addEventListener("click", (e) => {
   mainScreen.classList.add("active");
 });
 
-// Очистить избранное
 clearFavorites.addEventListener("click", () => {
   if (confirm("Точно очистить всё?")) {
     saveFavorites([]);
@@ -87,7 +82,6 @@ clearFavorites.addEventListener("click", () => {
   }
 });
 
-// Отображаем список избранного
 function renderFavorites() {
   const favorites = getFavorites();
   favoritesList.innerHTML = "";
@@ -118,10 +112,7 @@ function renderFavorites() {
   });
 }
 
-// Кнопка "новый факт"
 newFactBtn.addEventListener("click", showRandomFact);
 
-// При запуске показываем первый факт
 showRandomFact();
-// И рендерим избранное
 renderFavorites();

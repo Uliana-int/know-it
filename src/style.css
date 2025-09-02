@@ -6,10 +6,12 @@
 
 body {
   font-family: "Segoe UI", sans-serif;
-  background: #f7f9fc;
+  background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
   color: #333;
   line-height: 1.6;
   padding: 20px;
+  min-height: 100vh;
+  margin: 0;
 }
 
 .app {
@@ -21,8 +23,13 @@ body {
   display: none;
   padding: 20px;
   background: white;
-  border-radius: 12px;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  border-radius: 16px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+  transition: transform 0.2s ease;
+}
+
+.screen:hover {
+  transform: translateY(-2px);
 }
 
 .screen.active {
@@ -53,6 +60,8 @@ h1 {
 }
 
 .btn {
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
   display: block;
   width: 100%;
   padding: 12px;
@@ -63,11 +72,14 @@ h1 {
   cursor: pointer;
   background: #3498db;
   color: white;
-  transition: background 0.3s;
+  transition: 0.3s;
 }
 
 .btn:hover {
   background: #2980b9;
+  transform: translateY(-1px);
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+  scale: 1.02;
 }
 
 .btn-outline {
@@ -129,4 +141,23 @@ h1 {
   h1 {
     font-size: 24px;
   }
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0.6;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.fact {
+  animation: fadeIn 0.5s ease forwards;
+}
+
+.fact.fade {
+  animation: none;
 }
