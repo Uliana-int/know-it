@@ -6,12 +6,13 @@
 
 body {
   font-family: "Segoe UI", sans-serif;
-  background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
-  color: #333;
+  background: linear-gradient(135deg, #1a1a1a 0%, #2c2c2c 100%);
+  color: #e0e0e0;
   line-height: 1.6;
   padding: 20px;
   min-height: 100vh;
   margin: 0;
+  background-attachment: fixed;
 }
 
 .app {
@@ -21,132 +22,424 @@ body {
 
 .screen {
   display: none;
-  padding: 20px;
-  background: white;
-  border-radius: 16px;
-  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
-  transition: transform 0.2s ease;
+  padding: 30px;
+  background: rgba(30, 30, 30, 0.95);
+  border-radius: 20px;
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3), 0 0 0 1px rgba(255, 0, 0, 0.1),
+    inset 0 0 20px rgba(255, 0, 0, 0.1);
+  transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 0, 0, 0.2);
+  position: relative;
+  overflow: hidden;
+}
+
+.screen::before {
+  content: "";
+  position: absolute;
+  top: -2px;
+  left: -2px;
+  right: -2px;
+  bottom: -2px;
+  background: linear-gradient(45deg, #ff0000, #8b0000, #ff0000);
+  background-size: 400% 400%;
+  z-index: -1;
+  border-radius: 22px;
+  animation: borderGlow 3s ease-in-out infinite;
+  opacity: 0.3;
+}
+
+@keyframes borderGlow {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
 }
 
 .screen:hover {
-  transform: translateY(-2px);
+  transform: translateY(-5px);
+  box-shadow: 0 25px 50px rgba(0, 0, 0, 0.4), 0 0 0 1px rgba(255, 0, 0, 0.3),
+    inset 0 0 30px rgba(255, 0, 0, 0.2);
 }
 
 .screen.active {
   display: block;
+  animation: screenAppear 0.6s cubic-bezier(0.22, 0.61, 0.36, 1) forwards;
+}
+
+@keyframes screenAppear {
+  from {
+    opacity: 0;
+    transform: translateY(30px) scale(0.95);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
 }
 
 h1 {
   text-align: center;
-  margin-bottom: 20px;
-  color: #2c3e50;
+  margin-bottom: 30px;
+  color: #ff4444;
+  text-shadow: 0 0 10px rgba(255, 68, 68, 0.3);
+  font-size: 28px;
+  position: relative;
+  padding-bottom: 15px;
+}
+
+h1::after {
+  content: "";
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 100px;
+  height: 3px;
+  background: linear-gradient(90deg, transparent, #ff4444, transparent);
+  border-radius: 2px;
 }
 
 .fact-container {
-  min-height: 120px;
+  min-height: 150px;
   display: flex;
   align-items: center;
   justify-content: center;
-  margin: 20px 0;
-  padding: 15px;
-  background: #eef2f7;
-  border-radius: 8px;
+  margin: 25px 0;
+  padding: 25px;
+  background: rgba(40, 40, 40, 0.8);
+  border-radius: 15px;
   font-style: italic;
+  border: 1px solid rgba(255, 68, 68, 0.2);
+  position: relative;
+  overflow: hidden;
+  transition: all 0.3s ease;
+}
+
+.fact-container::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 2px;
+  background: linear-gradient(90deg, transparent, #ff4444, transparent);
 }
 
 .fact {
-  font-size: 18px;
+  font-size: 20px;
   text-align: center;
+  color: #ffffff;
+  line-height: 1.5;
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.3);
 }
 
 .btn {
-  transition: all 0.3s ease;
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  transition: all 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3), 0 0 15px rgba(255, 68, 68, 0.2);
   display: block;
   width: 100%;
-  padding: 12px;
-  margin: 10px 0;
-  font-size: 16px;
+  padding: 16px;
+  margin: 15px 0;
+  font-size: 17px;
+  font-weight: 600;
   border: none;
-  border-radius: 8px;
+  border-radius: 12px;
   cursor: pointer;
-  background: #3498db;
+  background: linear-gradient(45deg, #ff4444, #cc0000);
   color: white;
-  transition: 0.3s;
+  position: relative;
+  overflow: hidden;
+  letter-spacing: 0.5px;
+  text-transform: uppercase;
+  font-size: 15px;
+  letter-spacing: 1px;
+}
+
+.btn::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    rgba(255, 255, 255, 0.2),
+    transparent
+  );
+  transition: 0.5s;
 }
 
 .btn:hover {
-  background: #2980b9;
-  transform: translateY(-1px);
-  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+  transform: translateY(-3px);
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.4), 0 0 25px rgba(255, 68, 68, 0.4);
   scale: 1.02;
 }
 
+.btn:hover::before {
+  left: 100%;
+}
+
+.btn:active {
+  transform: translateY(-1px);
+  scale: 0.98;
+}
+
 .btn-outline {
-  background: #f1f1f1;
-  color: #555;
-  border: 1px solid #ccc;
+  background: transparent;
+  color: #ff4444;
+  border: 2px solid #ff4444;
+  box-shadow: 0 0 15px rgba(255, 68, 68, 0.1);
 }
 
 .btn-outline:hover {
-  background: #e0e0e0;
+  background: rgba(255, 68, 68, 0.1);
+  box-shadow: 0 0 20px rgba(255, 68, 68, 0.3),
+    inset 0 0 20px rgba(255, 68, 68, 0.1);
 }
 
 .btn-danger {
-  background: #e74c3c;
+  background: linear-gradient(45deg, #ff0000, #8b0000);
+  box-shadow: 0 6px 12px rgba(139, 0, 0, 0.3);
 }
 
 .btn-danger:hover {
-  background: #c0392b;
+  box-shadow: 0 10px 20px rgba(139, 0, 0, 0.4), 0 0 25px rgba(255, 0, 0, 0.4);
 }
 
 .link {
   display: block;
   text-align: center;
-  margin: 15px 0;
-  color: #3498db;
+  margin: 20px 0;
+  color: #ff6666;
   text-decoration: none;
-  font-size: 16px;
+  font-size: 17px;
+  font-weight: 500;
+  transition: all 0.3s ease;
+  position: relative;
+  padding: 10px;
+}
+
+.link:hover {
+  color: #ff4444;
+  text-shadow: 0 0 10px rgba(255, 102, 102, 0.5);
+  transform: translateX(5px);
+}
+
+.link::after {
+  content: "";
+  position: absolute;
+  bottom: 5px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 0;
+  height: 2px;
+  background: linear-gradient(90deg, transparent, #ff4444, transparent);
+  transition: width 0.3s ease;
+}
+
+.link:hover::after {
+  width: 100%;
 }
 
 .fact-list {
   list-style: none;
-  margin: 20px 0;
+  margin: 25px 0;
 }
 
 .fact-list li {
-  padding: 12px;
-  margin: 8px 0;
-  background: #f8f9fa;
-  border-left: 4px solid #3498db;
-  border-radius: 6px;
+  padding: 20px;
+  margin: 12px 0;
+  background: rgba(40, 40, 40, 0.8);
+  border-left: 4px solid #ff4444;
+  border-radius: 12px;
   position: relative;
+  transition: all 0.3s ease;
+  border: 1px solid rgba(255, 68, 68, 0.1);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+.fact-list li:hover {
+  transform: translateX(5px);
+  border-left: 4px solid #ff6666;
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3);
+}
+
+.fact-list li::before {
+  content: "❤️";
+  position: absolute;
+  left: -15px;
+  top: -10px;
+  font-size: 20px;
+  color: #ff4444;
+  text-shadow: 0 0 5px rgba(255, 68, 68, 0.5);
+}
+
+.fact-list li .fact-text {
+  margin-right: 80px;
+  line-height: 1.5;
+  color: #ffffff;
 }
 
 .fact-list li button {
   position: absolute;
-  right: 10px;
-  top: 10px;
+  right: 15px;
+  top: 50%;
+  transform: translateY(-50%);
   width: auto;
-  padding: 4px 8px;
-  font-size: 12px;
-  background: #e74c3c;
+  padding: 8px 12px;
+  font-size: 14px;
+  background: linear-gradient(45deg, #ff0000, #8b0000);
+  color: white;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  font-weight: 600;
+  box-shadow: 0 4px 8px rgba(139, 0, 0, 0.3);
+}
+
+.fact-list li button:hover {
+  background: linear-gradient(45deg, #ff3333, #aa0000);
+  transform: translateY(-50%) scale(1.05);
+  box-shadow: 0 6px 12px rgba(255, 0, 0, 0.4);
+}
+
+.fact-list li button:active {
+  transform: translateY(-50%) scale(0.95);
+}
+
+/* Адаптивность */
+@media (max-width: 768px) {
+  body {
+    padding: 15px;
+  }
+
+  .screen {
+    padding: 25px 20px;
+    border-radius: 16px;
+  }
+
+  h1 {
+    font-size: 24px;
+    margin-bottom: 25px;
+  }
+
+  .fact-container {
+    min-height: 130px;
+    padding: 20px;
+    margin: 20px 0;
+  }
+
+  .fact {
+    font-size: 18px;
+  }
+
+  .btn {
+    padding: 14px;
+    font-size: 16px;
+    margin: 12px 0;
+    border-radius: 10px;
+  }
+
+  .link {
+    font-size: 16px;
+    margin: 15px 0;
+  }
+
+  .fact-list li {
+    padding: 16px;
+    margin: 10px 0;
+  }
+
+  .fact-list li .fact-text {
+    margin-right: 70px;
+    font-size: 16px;
+  }
+
+  .fact-list li button {
+    padding: 6px 10px;
+    font-size: 13px;
+    right: 12px;
+  }
 }
 
 @media (max-width: 480px) {
-  .btn {
+  body {
     padding: 10px;
+  }
+
+  .screen {
+    padding: 20px 15px;
+    border-radius: 14px;
+  }
+
+  h1 {
+    font-size: 22px;
+    margin-bottom: 20px;
+  }
+
+  .fact-container {
+    min-height: 120px;
+    padding: 15px;
+    margin: 15px 0;
+  }
+
+  .fact {
+    font-size: 16px;
+  }
+
+  .btn {
+    padding: 12px;
+    font-size: 15px;
+    margin: 10px 0;
+    border-radius: 8px;
+  }
+
+  .link {
+    font-size: 15px;
+    margin: 12px 0;
+  }
+
+  .fact-list {
+    margin: 20px 0;
+  }
+
+  .fact-list li {
+    padding: 14px;
+    margin: 8px 0;
+  }
+
+  .fact-list li .fact-text {
+    margin-right: 60px;
     font-size: 15px;
   }
-  h1 {
-    font-size: 24px;
+
+  .fact-list li button {
+    padding: 5px 8px;
+    font-size: 12px;
+    right: 10px;
+  }
+
+  .fact-list li::before {
+    font-size: 16px;
+    left: -12px;
+    top: -8px;
   }
 }
 
+/* Анимации */
 @keyframes fadeIn {
   from {
-    opacity: 0.6;
-    transform: translateY(10px);
+    opacity: 0;
+    transform: translateY(20px);
   }
   to {
     opacity: 1;
@@ -155,9 +448,49 @@ h1 {
 }
 
 .fact {
-  animation: fadeIn 0.5s ease forwards;
+  animation: fadeIn 0.6s cubic-bezier(0.22, 0.61, 0.36, 1) forwards;
 }
 
 .fact.fade {
   animation: none;
+}
+
+/* Дополнительные анимации для плавности */
+.screen {
+  animation-duration: 0.6s;
+  animation-fill-mode: both;
+}
+
+.screen.active {
+  animation-name: slideInUp;
+}
+
+@keyframes slideInUp {
+  from {
+    opacity: 0;
+    transform: translateY(50px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Стили для скроллбара */
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: rgba(40, 40, 40, 0.5);
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb {
+  background: linear-gradient(#ff4444, #8b0000);
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: linear-gradient(#ff6666, #aa0000);
 }
